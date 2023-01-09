@@ -1,0 +1,18 @@
+<html>
+	<body>
+        {# este es un comentario#}
+		<h1>Esta es mi primera plantilla</h1>
+        <h3>Autor: {{nombres}} {{apellidos}}<h3/>
+        <p>Esta es la fecha de hoy: {{ahora.day}}/{{ahora.month}}/{{ahora.year}}<p/>
+        <p>Temas del curso:</p>
+        <ul>
+            {% if temas %}
+                {% for tema in temas %}
+                <li>{{tema}}</li>
+                {% endfor %}
+            {% else %}
+                <p>No hay temas que mostrar</p>
+            {% endif %}
+        </ul>
+	</body>
+</html>
