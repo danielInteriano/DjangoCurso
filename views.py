@@ -1,27 +1,25 @@
 import datetime
 
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.template import Context, Template
-from django.templete.loader import get_template
 
 
-#primera vista
+class Persona(object):
+    def __init__(self, nombre, apellido):
+        self.nombre = nombre
+        self.apellido = apellido
+
+#primera vista - forma indicada para renderizar una vista
 def saludo(request):
-    nombre = 'Daniel Stanly'
-    apellido = 'Interiano Rápalo'
+    p = Persona('Daniel', 'Interiano')
     ahora = datetime.datetime.now()
 
-    # variable que permite cargar cualquier template
-    doc_externo = get_template('plantilla1.html')
-
-    # creación del contexto
-    diccionario = {'nombres':nombre, 'apellidos':apellido, 'ahora': ahora,
+    # creación del diccionario
+    diccionario = {'nombres':p.nombre, 'apellidos':p.apellido, 'ahora': ahora,
                    'temas':['Plantillas','Modelos','Formularios','Vistas','Despliegues']}
 
-    # creación de documento a renderizar
-    documento = doc_externo.render(diccionario)
-
-    return HttpResponse(documento)
+    return render(request, "plantilla1.html", diccionario)
 
 #segunda vista
 def despedida(request):
